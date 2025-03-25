@@ -99,6 +99,23 @@ dependencies {
                 android:name="android.accessibilityservice"
                 android:resource="@xml/assists_service" />
         </service>
+        
+        <!-- 或者使用下面的服务可以解决一些应用混淆节点的问题，比如微信8.0.51以上版本获取的节点元素错乱问题 -->
+        <!-- ⚠️ 选其一 -->
+        <service
+            android:name="com.google.android.accessibility.selecttospeak.SelectToSpeakService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <!--android:priority="10000" 可提高服务在设置中的权重，排在前面     -->
+            <intent-filter android:priority="10000">
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/assists_service" />
+        </service>
+        
         <!-- 添加代码 ↑-->
     </application>
 
@@ -174,34 +191,21 @@ StepManager.isStop = true
 - [Appium结合AccessibilityService实现自动化微信登录](https://juejin.cn/post/7483409317564907530)
 
 ## 更新日志
-### v3.2.11
-更新时间：2025-03-19
-1. 修复手势执行一直未释放问题
-
-### v3.2.1
-更新时间：2025-03-13
-1. 优化代码完善注释
-
-### v3.2.0
-更新时间：2025-03-02
-1. 简化无障碍服务api调用
-2. 封装屏幕录制：简化权限请求（增加自动授权）、截取屏幕、截取图片类型元素
-3. 封装浮窗管理：支持窗口拖动、缩放、堆叠、浮窗toast、手势拦截切换等
-4. 示例增加基础无障碍服务api调用示例等
+### v3.2.12
+更新时间：2025-03-25
+1. assists-mp去掉对于opencv减少不必要的包体积
+2. 兼容微信8.0.51以上版本获取的节点元素被混淆问题
 
 ### [版本历史](https://github.com/ven-coder/Assists/releases)
-
-## 功能计划
-- 脚本录制
-- js支持
-- flutter插件
 
 ## 有问题欢迎反馈交流（微信群二维码失效可以加我拉进群）
 
 | 交流群| 个人微信 |
 |:---------:|:-----------:|
-| <img src="https://github.com/user-attachments/assets/73dffcbb-8f1f-47fb-9ce9-e125c3a417b4" width=200/> | <img src="https://github.com/user-attachments/assets/49378ec3-71a2-4a5e-8510-bec4ec8d915e" width=200/>
+| <img src="https://github.com/user-attachments/assets/f42960bd-a005-4df3-bf53-310912e4e486" width=200/> | <img src="https://github.com/user-attachments/assets/49378ec3-71a2-4a5e-8510-bec4ec8d915e" width=200/>
 1群已满200人，要进1群可加我拉进1群
+
+### ❤️ 已入驻爱发电，感谢[支持](https://afdian.com/a/vencoder) 
 
 ## 我的付费社群
 付费社群提供的服务：
